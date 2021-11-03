@@ -1,0 +1,97 @@
+import numbers
+
+from pyuba.calc import curve_functions
+from pyuba.data import cohort_projections, retention_profile
+from pyuba.graphs import graphs
+
+
+class PyUba:
+    def __init__(self):
+        return None
+
+    def create_profile(self, days, retention_values, form="best_fit", profile_max=None):
+
+        if self.test_retention_profile(days, retention_values):
+            profile = {"x": days, "y": retention_values}
+
+        if profile_max is not None and (
+            not isinstance(profile_max, int) or profile_max < max(days)
+        ):
+            raise Exception(
+                "profile_max must be an integer greater than or equal to maximum value of Days data"
+            )
+
+        #  build the params attribute, which contains profile function curve shape parameters
+        #  if the best fit function is requested, use teh get_retention_projection_best_fit method
+        #  which iterates through all curve functions and finds the best fit (least squared error)
+        #  if a single form was provided, just get that
+        profile = retention_profile.get_retention_projection_best_fit(
+            profile, profile_max
+        )
+        if form == "best_fit" or form == "" or form is None:
+            profile["retention_profile"] = "best_fit"
+        else:
+            if form in curve_functions.processes or form == "interpolate":
+                profile["retention_profile"] = form
+            else:
+                raise Exception("Invalid retention curve function provided")
+
+        profile["retention_projection"] = retention_profile.generate_retention_profile(
+            profile, profile_max
+        )
+        return profile
+
+    def test_retention_profile(self, x_data, y_data):
+        # do both lists have the same number of elements?
+        if len(x_data) != len(y_data):
+            raise Exception("X and Y have differing numbers of data points")
+        if not all(isinstance(x, numbers.Real) for x in x_data):
+            raise Exception("X data can only contain integers")
+        if not all(isinstance(y, (int, float)) for y in y_data):
+            raise Exception("Y data can only contain integers and floats")
+        if not all((float(y) <= 100 and float(y) > 0) for y in y_data):
+            raise Exception("Y data must be less than or equal to 100 and more than 0")
+        if not all((x > 0) for x in x_data):
+            raise Exception("X data must be more than 0")
+        if x_data is None or y_data is None or len(x_data) < 2 or len(y_data) < 2:
+            raise Exception("Insufficient retention data provided!")
+
+        return True
+
+    def plot_retention(self, profile, show_average_values=True):
+        graphs.plot_retention(profile, show_average_values)
+
+    def project_cohorted_DAU(
+        self,
+        profile,
+        periods,
+        cohorts,
+        DAU_target=None,
+        DAU_target_timeline=None,
+        start_date=1,
+    ):
+        return cohort_projections.project_cohorted_DAU(
+            profile, periods, cohorts, DAU_target, DAU_target_timeline, start_date
+        )
+
+    def DAU_total(self, forward_DAU):
+        return cohort_projections.DAU_total(forward_DAU)
+
+    def plot_forward_DAU_stacked(
+        self,
+        forward_DAU,
+        forward_DAU_labels,
+        forward_DAU_dates,
+        show_values=False,
+        show_totals_values=False,
+    ):
+        graphs.plot_forward_DAU_stacked(
+            forward_DAU,
+            forward_DAU_labels,
+            forward_DAU_dates,
+            show_values,
+            show_totals_values,
+        )
+
+    def combine_DAU(self, DAU_totals, labels=None):
+        return cohort_projections.combine_DAU(DAU_totals, labels)
