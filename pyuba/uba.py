@@ -1,8 +1,9 @@
 import numbers
 
 from pyuba.calc import curve_functions
-from pyuba.data import cohort_projections, retention_profile
+from pyuba.data import aged_dau_projections, cohort_projections, retention_profile
 from pyuba.graphs import graphs
+from pyuba.utils import utils
 
 
 class PyUba:
@@ -95,3 +96,12 @@ class PyUba:
 
     def combine_DAU(self, DAU_totals, labels=None):
         return cohort_projections.combine_DAU(DAU_totals, labels)
+
+    def get_DNU(self, forward_DAU):
+        return aged_dau_projections.get_DNU(forward_DAU)
+
+    def to_excel(self, df, file_name=None, sheet_name=None):
+        utils.to_excel(df, file_name, sheet_name)
+
+    def to_json(self, df, file_name=None):
+        utils.to_json(df, file_name)

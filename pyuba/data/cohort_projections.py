@@ -113,9 +113,9 @@ def DAU_total(forward_DAU):
     # get the sums of the columns
     total_series = forward_DAU.sum()
 
-    DAU_total = pd.DataFrame(columns=["DAU"] + forward_DAU.columns.tolist()).set_index(
-        "DAU"
-    )
+    DAU_total = pd.DataFrame(
+        columns=["DAU"] + forward_DAU.columns.tolist(), dtype="int"
+    ).set_index("DAU")
     DAU_total.loc[len(DAU_total)] = total_series
 
     # change the index name
