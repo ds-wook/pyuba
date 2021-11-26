@@ -3,9 +3,11 @@ from typing import Optional
 import pandas as pd
 
 
-def to_excel(df, file_name=None, sheet_name=None):
+def to_excel(
+    df: pd.DataFrame, file_name: Optional[str] = None, sheet_name: Optional[str] = None
+):
     if not file_name:
-        file_name = "theseus_output.xlsx"
+        file_name = "pyuba_output.xlsx"
     if not sheet_name:
         sheet_name = "sheet1"
 
@@ -17,9 +19,9 @@ def to_excel(df, file_name=None, sheet_name=None):
     return None
 
 
-def to_json(df, file_name=None):
+def to_json(df: pd.DataFrame, file_name: Optional[str] = None):
     if not file_name:
-        file_name = "theseus_output.json"
+        file_name = "pyuba_output.json"
 
     if not file_name.endswith(".json"):
         file_name = file_name + ".json"
