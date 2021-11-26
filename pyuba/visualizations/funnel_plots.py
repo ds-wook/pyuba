@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 import pandas as pd
-from calc.funnel import create_funnel_df, group_funnel_dfs
+from pyuba.calc.funnel import create_funnel_df, group_funnel_dfs
 from plotly import graph_objs as go
 
 
