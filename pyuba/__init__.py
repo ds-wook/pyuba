@@ -1,4 +1,12 @@
-from .calc import acquisition, bayesian, frequentist, funnel, retention, user_journey
-from .data import make_dataset
-from .utils import utils
-from .visualizations import funnel_plots, growth, retention_plots, user_journey_plots
+from .calc.acquisition import *
+from .calc.bayesian import *
+from .calc.frequentist import *
+from .calc.funnel import *
+from .calc.retention import *
+from .calc.user_journey import *
+from .data.make_dataset import *
+from .utils.utils import *
+from .visualizations.funnel_plots import *
+from .visualizations.growth import *
+from .visualizations.retention_plots import *
+from .visualizations.user_journey_plots import *
