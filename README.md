@@ -14,8 +14,7 @@ $ pip install pyuba
 ```python
 import pyuba as uba
 
-uba = PyUba()
-events = uba.load_dataset(1000)
+events = uba.make_dataset.load_dataset(1000)
 
 ```
 ## Requirements
