@@ -18,8 +18,6 @@ def to_excel(
 
     df.to_excel(file_name, sheet_name=sheet_name)
 
-    return None
-
 
 def to_json(df: pd.DataFrame, file_name: Optional[str] = None):
     if not file_name:
@@ -29,8 +27,6 @@ def to_json(df: pd.DataFrame, file_name: Optional[str] = None):
         file_name = file_name + ".json"
 
     df.to_json(path_or_buf=file_name, orient="index")
-
-    return None
 
 
 def create_plotly_table(data: Dict[str, Optional[Any]]):

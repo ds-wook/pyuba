@@ -6,7 +6,7 @@ import scipy.stats as scs
 import seaborn as sns
 from matplotlib.figure import Figure
 
-from pyuba.utils.utils import round_decimals_down
+from .utils import round_decimals_down
 
 
 class Bayesian:
