@@ -2,7 +2,6 @@ from typing import Tuple
 
 import numpy as np
 import pandas as pd
-import streamlit as st
 
 from .acquisition import acquisition_events_cohort
 
@@ -21,7 +20,6 @@ def cohort_period(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-@st.cache(allow_output_mutation=True)
 def load_cohorts(events: pd.DataFrame) -> pd.DataFrame:
     events = acquisition_events_cohort(events=events, acquisition_event_name="Install")
     events = events[events["user_active"]]
@@ -30,7 +28,6 @@ def load_cohorts(events: pd.DataFrame) -> pd.DataFrame:
     return cohorts
 
 
-@st.cache(allow_output_mutation=True)
 def load_user_retention(cohorts: pd.DataFrame) -> pd.DataFrame:
     cohorts = cohorts.astype(str).groupby(level=0).apply(cohort_period)
     cohorts = cohorts.astype(int)

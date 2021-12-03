@@ -5,23 +5,16 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pyuba",
-    version="0.0.5",
+    version="0.0.7",
     author="Wook Lee",
     author_email="leewook94@gmail.com",
     description="growth hacking tool test",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ds-wook/pyuba",
+    keywords=["growth-hacking", "visualization", "data-analysis"],
     packages=find_packages(),
-    install_requires=[
-        "numpy",
-        "pandas",
-        "matplotlib",
-        "seaborn",
-        "plotly",
-        "scipy",
-        "streamlit",
-    ],
+    install_requires=["numpy", "pandas", "matplotlib", "seaborn", "plotly", "scipy"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",

@@ -1,4 +1,6 @@
 # PyUBA: Python User Behavior Analysis
+[![PyPI version](https://badge.fury.io/py/pyuba.svg)](https://badge.fury.io/py/pyuba)
+[![GitHub license](https://img.shields.io/github/license/ds-wook/pyuba)](https://github.com/ds-wook/pyuba/blob/main/LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## What is it?
