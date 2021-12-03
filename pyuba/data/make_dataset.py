@@ -5,6 +5,14 @@ import pandas as pd
 
 
 def load_dataset(index_range: int = 10000, id_range: int = 5000) -> pd.DataFrame:
+    """
+    make growth hacking dataset
+    :param index_range: (int)
+                    make index random information
+    :param id_range: (int)
+                    make random information
+    :return: (DataFrame)
+    """
     # instantiate a dataframe with 100,000 rows
     events = pd.DataFrame(
         {"distinct_id": 0, "name": None, "time": pd.NaT, "user_source": None},

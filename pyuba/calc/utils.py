@@ -8,6 +8,15 @@ import plotly.graph_objects as go
 def to_excel(
     df: pd.DataFrame, file_name: Optional[str] = None, sheet_name: Optional[str] = None
 ):
+    """
+    save excel files
+    :df: (DataFrame)
+                    events dataframe
+    :file_name: (str)
+                    named file name
+    :sheet_name: (str)
+                    named sheet name
+    """
     if not file_name:
         file_name = "pyuba_output.xlsx"
     if not sheet_name:
@@ -20,6 +29,15 @@ def to_excel(
 
 
 def to_json(df: pd.DataFrame, file_name: Optional[str] = None):
+    """
+    save json files
+    :df: (DataFrame)
+                    events dataframe
+    :file_name: (str)
+                    named file name
+    :sheet_name: (str)
+                    named sheet name
+    """
     if not file_name:
         file_name = "pyuba_output.json"
 
@@ -30,6 +48,12 @@ def to_json(df: pd.DataFrame, file_name: Optional[str] = None):
 
 
 def create_plotly_table(data: Dict[str, Optional[Any]]):
+    """
+    create plotly table
+    :df: (DataFrame)
+                    table dataset
+    :return (go.Figure)
+    """
     fig = go.Figure(
         data=[
             go.Table(
