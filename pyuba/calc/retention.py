@@ -21,6 +21,12 @@ def cohort_period(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def load_cohorts(events: pd.DataFrame) -> pd.DataFrame:
+    """
+    make cohorts datasets
+    :param events: (int)
+                    make index random information
+    :return: (DataFrame)
+    """
     events = acquisition_events_cohort(events=events, acquisition_event_name="Install")
     events = events[events["user_active"]]
     grouped = events.groupby(["cohort", "event_period"])
@@ -29,6 +35,12 @@ def load_cohorts(events: pd.DataFrame) -> pd.DataFrame:
 
 
 def load_user_retention(cohorts: pd.DataFrame) -> pd.DataFrame:
+    """
+    make user retention datasets
+    :param events: (int)
+                    make index random information
+    :return: (DataFrame)
+    """
     cohorts = cohorts.astype(str).groupby(level=0).apply(cohort_period)
     cohorts = cohorts.astype(int)
     cohorts.reset_index(inplace=True)
