@@ -90,6 +90,12 @@ def create_plotly_table(data: Dict[str, Optional[Any]]):
 def round_decimals_down(number: float, decimals: int = 2) -> float:
     """
     Returns a value rounded down to a specific number of decimal places.
+    paramas:
+        number: float number
+    params:
+        decimals: make ceil number
+    return:
+        (float)
     """
     if not isinstance(decimals, int):
         raise TypeError("decimal places must be an integer")
