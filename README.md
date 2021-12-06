@@ -14,9 +14,8 @@ $ pip install pyuba
 ## Usage Examples
 
 ```python
-from plotly.offline import iplot
 import pyuba as uba
-
+from plotly.offline import iplot
 
 events = uba.load_dataset(1000)
 
@@ -35,12 +34,12 @@ fig = uba.plot_users_per_period(
 iplot(fig)
 ```
 ## Requirements
-+ numpy==1.21.4
-+ pandas==1.3.4
-+ matplotlib==3.5.0
-+ seaborn==0.11.2
-+ plotly==5.4.0
-+ scipy==1.7.3
++ numpy
++ pandas
++ matplotlib
++ seaborn
++ plotly
++ scipy
 
 
 ## License
