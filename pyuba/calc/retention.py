@@ -9,6 +9,9 @@ from .acquisition import acquisition_events_cohort
 def cohort_period(df: pd.DataFrame) -> pd.DataFrame:
     """
     Creates a `CohortPeriod` column, which is the Nth period based on the user's first purchase.
+    :param df: (pd.DataFrame)
+    :return: (pd.DataFrame)
+
     Example
     -------
     Say you want to get the 3rd month for every user:

@@ -15,14 +15,14 @@ class Bayesian:
     ...
     Attributes
     ---------
-    visitors_A, visitors_B : int
+    :param visitors_A, visitors_B : int
         The number of visitors in either variation
-    conversions_A, conversions_B : int
+    :param conversions_A, conversions_B : int
         The number of conversions in either variation
-    control_cr, variant_cr : float
+    :param control_cr, variant_cr : float
         The conversion rates for A and B, labelled with A as the control and
         B as the variant
-    relative_difference : float
+    :param relative_difference : float
         The percentage difference between A and B
     Methods
     -------

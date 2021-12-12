@@ -10,9 +10,9 @@ def to_excel(
 ):
     """
     save excel files
-    :df: (DataFrame)
+    :param df: (DataFrame)
                     events dataframe
-    :file_name: (str)
+    :param file_name: (str)
                     named file name
     :sheet_name: (str)
                     named sheet name
@@ -31,11 +31,11 @@ def to_excel(
 def to_json(df: pd.DataFrame, file_name: Optional[str] = None):
     """
     save json files
-    :df: (DataFrame)
+    :param df: (DataFrame)
                     events dataframe
-    :file_name: (str)
+    :param file_name: (str)
                     named file name
-    :sheet_name: (str)
+    :param sheet_name: (str)
                     named sheet name
     """
     if not file_name:
@@ -50,7 +50,7 @@ def to_json(df: pd.DataFrame, file_name: Optional[str] = None):
 def create_plotly_table(data: Dict[str, Optional[Any]]):
     """
     create plotly table
-    :df: (DataFrame)
+    :param df: (DataFrame)
                     table dataset
     :return (go.Figure)
     """

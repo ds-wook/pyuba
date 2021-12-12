@@ -3,7 +3,9 @@ import pandas as pd
 import plotly.graph_objects as go
 
 
-def draw_user_retention(df: pd.DataFrame) -> go.Figure:
+def draw_user_retention(
+    df: pd.DataFrame, width: int = 1550, height: int = 1550
+) -> go.Figure:
     """
     draw user retention heatmap
     :params
@@ -40,8 +42,8 @@ def draw_user_retention(df: pd.DataFrame) -> go.Figure:
             autorange="reversed",
         ),
         xaxis=dict(showgrid=False),
-        width=1550,
-        height=1550,
+        width=width,
+        height=height,
         autosize=True,
     )
     trace = go.Heatmap(x=x, y=y, z=z, colorscale="Peach")
