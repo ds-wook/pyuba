@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 
+# make dataset function
 def load_dataset(index_range: int = 10000, id_range: int = 5000) -> pd.DataFrame:
     """
     make growth hacking dataset
