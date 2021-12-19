@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pyuba",
-    version="0.0.9",
+    version="0.1.0",
     author="Wook Lee",
     author_email="leewook94@gmail.com",
     description="growth hacking tool test",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ds-wook/pyuba",
+    url="https://growth-dashboard.herokuapp.com/",
     keywords=["growth-hacking", "visualization", "data-analysis"],
     packages=find_packages(),
     install_requires=["numpy", "pandas", "matplotlib", "seaborn", "plotly", "scipy"],

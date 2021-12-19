@@ -1,6 +1,9 @@
+from typing import List, Union
+
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
+from plotly.graph_objects import Figure
 
 
 def draw_user_retention(
@@ -49,5 +52,33 @@ def draw_user_retention(
     trace = go.Heatmap(x=x, y=y, z=z, colorscale="Peach")
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(uniformtext_minsize=6, uniformtext_mode="hide")
+
+    return fig
+
+
+def mau_plot(activate: Union[pd.Series, np.ndarray, List[float]]) -> Figure:
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(
+            x=[
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ],
+            y=activate,
+            mode="lines+markers",
+            name="lines+markers",
+        )
+    )
+    fig.update_xaxes(tickangle=30)
 
     return fig

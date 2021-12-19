@@ -73,3 +73,88 @@ def mask_retention_table(dim: Tuple[int]) -> np.ndarray:
         mask[row, : mask.shape[0] - row] = False
 
     return mask
+
+
+def split_revenue(
+    sign_up: pd.DataFrame,
+    payment: pd.DataFrame,
+    resiual_rate_color: str = "lightgreen",
+    payment_rate_color: str = "#ee1f5f",
+    arppu_color="lightblue",
+) -> pd.DataFrame:
+    """
+    Show Revenue Table
+    :param sign_up: (pd.DataFrame)
+                sign_up dataset
+    :param payment: (pd.DataFrame)
+                payment dataset
+    :param resiual_rate_color: (str)
+                resiual_rate feature bar color
+    :param payment_rate_color: (str)
+                payment_rate feature bar color
+    :param arppu_color: (str)
+                ARPPU feature bar color
+    :return: (pd.DataFrame)
+            revenue dataframe
+    """
+    try:
+        sign_up["sign_up_month"] = sign_up["sign_up"].dt.month
+        sign_up["last_login_month"] = sign_up["last_login"].dt.month
+
+    except AttributeError:
+        sign_up["sign_up"] = pd.to_datetime(sign_up["sign_up"])
+        sign_up["last_login"] = pd.to_datetime(sign_up["last_login"])
+        sign_up["sign_up_month"] = sign_up["sign_up"].dt.month
+        sign_up["last_login_month"] = sign_up["last_login"].dt.month
+
+    sign_up_dict = sign_up.groupby("user_id")["sign_up"].first().to_dict()
+    payment["sign_up_month"] = payment["user_id"].map(sign_up_dict)
+    payment["sign_up_month"] = payment["sign_up_month"].dt.month
+
+    retention = (
+        payment.groupby("user_id")
+        .agg(
+            payment_count=("payment", "count"),
+            sales=("payment", "sum"),
+            sign_up_month=("sign_up_month", "first"),
+        )
+        .reset_index()
+    )
+
+    retention = (
+        retention.groupby("sign_up_month")
+        .agg(buyer=("sign_up_month", "count"), sales=("sales", "sum"))
+        .reset_index()
+    )
+
+    retention["sign_up_number"] = (
+        sign_up.groupby("sign_up_month")["user_id"].count().values
+    )
+    retention["activate"] = (
+        sign_up.groupby(["sign_up_month", "last_login_month"])["user_id"]
+        .count()
+        .unstack()
+        .iloc[:, -1]
+        .values
+    )
+
+    retention["residual_rate"] = (
+        retention["activate"] / retention["sign_up_number"]
+    ) * 100
+    retention["payment_rate"] = (retention["buyer"] / retention["activate"]) * 100
+    retention["ARPPU"] = retention["sales"] / retention["buyer"]
+
+    retention = (
+        retention.style.format(
+            {
+                "residual_rate": "{:.0f}%",
+                "payment_rate": "{:.0f}%",
+                "ARPPU": "{:.0f}",
+            }
+        )
+        .bar(align="mid", subset=["residual_rate"], color=resiual_rate_color)
+        .bar(align="mid", subset=["payment_rate"], color=payment_rate_color)
+        .bar(align="mid", subset=["ARPPU"], color=arppu_color)
+    )
+
+    return retention
