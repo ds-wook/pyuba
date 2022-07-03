@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pyuba",
-    version="0.1.0",
+    version="0.1.1",
     author="Wook Lee",
     author_email="leewook94@gmail.com",
     description="growth hacking tool test",

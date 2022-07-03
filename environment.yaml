@@ -1,0 +1,12 @@
+name: pyuba
+dependencies:
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - seaborn
+  - plotly
+  - ipykernel
+  - flake8
+  - black
+  - isort
